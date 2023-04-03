@@ -3,4 +3,29 @@
     justify-content: space-between;
     height: 57px;
     padding: 20px 50px 0 0;
+    & > div {
+
+        display: flex;
+        align-items: center;
+
+        & > img {
+            height: 57px;
+        }
+
+        & > * {
+            margin-right: 20px;
+        }
+
+        & > a, a:visited, a:hover {
+            text-decoration: none;
+            background-color: #D9D9D9;
+            border-radius: 15px;
+            padding: 10px;
+            color: black;
+        }
+
+        & > a:hover {
+            background-color: #cacaca;
+        }
+    }
 } 

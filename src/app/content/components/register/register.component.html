@@ -1,0 +1,7 @@
+<form [formGroup]="formGroup" (submit)="register()">
+    <span>Авторизация</span>
+    <input type="text" formControlName="login" placeholder="Логин">
+    <input type="password" formControlName="password" placeholder="Пароль">
+    <input type="password" formControlName="rePassword" placeholder="Повторите пароль">
+    <button type="submit">Войти</button>
+</form>
