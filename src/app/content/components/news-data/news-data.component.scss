@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+
+    & > * {
+        width: 50%;
+        border-radius: 40px;
+        box-sizing: border-box;
+    }
+}
+
+img {
+    margin-right: 50px;
+}
+
+p {
+    background-color: #D9D9D9;
+    padding: 20px;
+}
