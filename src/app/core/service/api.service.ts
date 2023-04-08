@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, tap} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, tap, throwError} from 'rxjs';
 import { JwtResponse } from 'src/app/content/models/jwt-response';
 import { LoginRequest as AuthRequest } from 'src/app/content/models/login-request';
 import { UserInfo } from 'src/app/content/models/user-info';
@@ -15,10 +15,14 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  loadUserInfo(): void {
-    this.httpClient.get<UserInfo>(`${environment.apiUrl}user/info`).pipe(
-      tap(data => this.userInfo$.next(data))
-    );
+  loadUserInfo(): Observable<UserInfo> {
+    if(this.isAuthenticated()){
+      return this.httpClient.get<UserInfo>(`${environment.apiUrl}user/info`).pipe(
+        tap(data => this.userInfo$.next(data))
+      );
+    }
+
+    return throwError(null);
   }
 
   getUserInfo(): BehaviorSubject<UserInfo | null>{
@@ -40,7 +44,7 @@ export class ApiService {
   saveToken(token: any){
     if(token.token){
       localStorage.setItem('token', token.token);
-      this.loadUserInfo();
+      this.loadUserInfo().subscribe();
     }
     
     return token?.type
@@ -49,6 +53,10 @@ export class ApiService {
   clearUserData() {
     this.userInfo$.next(null);
     localStorage.removeItem('token');
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
   }
 
 }

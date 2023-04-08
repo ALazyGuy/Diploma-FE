@@ -1,3 +1,5 @@
-<a href="#">Тесты</a><span>|</span>
-<a href="#">Результаты</a><span>|</span>
-<a href="#">Теория</a>
+<div *ngIf="userinfo$|async">
+    <a href="#">Тесты</a><span>|</span>
+    <a href="#">Результаты</a><span>|</span>
+    <a href="#">Теория</a>
+</div>

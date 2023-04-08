@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewsComponent } from './components/news/news.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AnonymousGuard } from '../core/guards/anonymous.guard';
 
 const routes: Routes = [
   {
@@ -11,11 +12,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AnonymousGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [AnonymousGuard]
   },
   {
     path: '',
