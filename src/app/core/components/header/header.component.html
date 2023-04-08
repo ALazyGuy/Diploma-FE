@@ -1,6 +1,11 @@
 <img src="assets/header/logo.png" [routerLink]="['/news']"/>
 <div>
-    <a [routerLink]="['/login']">Войти</a>
-    <a [routerLink]="['/register']">Зарегистрироваться</a>
+    <ng-container *ngIf="(userinfo$|async) as userinfo; else anon">
+        <p>{{userinfo.username}}</p>
+    </ng-container>
+    <ng-template #anon>
+        <a [routerLink]="['/login']">Войти</a>
+        <a [routerLink]="['/register']">Зарегистрироваться</a>
+    </ng-template>
     <img src="assets/header/user.png"/>
 </div>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { LoginRequest } from '../../models/login-request';
+import { ApiService } from 'src/app/core/service/api.service';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +12,19 @@ export class LoginComponent {
 
   formGroup: FormGroup = this.createFormGroup();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
   login(): void {
-    alert(`${this.formGroup.controls['login'].value}:${this.formGroup.controls['password'].value}`);
+    const dto: LoginRequest = this.formGroup.value;
+
+    this.apiService.login(dto).subscribe(data => {
+      
+    })
   }
 
   private createFormGroup(): FormGroup {
     return this.formBuilder.group({
-      login: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }

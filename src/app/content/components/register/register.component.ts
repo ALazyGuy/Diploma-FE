@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { LoginRequest } from '../../models/login-request';
+import { ApiService } from 'src/app/core/service/api.service';
 
 @Component({
   selector: 'app-register',
@@ -10,15 +12,20 @@ export class RegisterComponent {
 
   formGroup: FormGroup = this.createFormGroup();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
   register(): void {
-    alert(`${this.formGroup.controls['login'].value}:${this.formGroup.controls['password'].value}:${this.formGroup.controls['rePassword'].value}`);
+      const dto: LoginRequest = {
+        username: this.formGroup.controls['username'].value,
+        password: this.formGroup.controls['password'].value
+      };
+
+      this.apiService.register(dto).subscribe(data => data && alert("Conflict"));
   }
 
   private createFormGroup(): FormGroup {
     return this.formBuilder.group({
-      login: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       rePassword: ['', [Validators.required]]
     });
