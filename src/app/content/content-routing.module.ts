@@ -4,6 +4,8 @@ import { NewsComponent } from './components/news/news.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AnonymousGuard } from '../core/guards/anonymous.guard';
+import { RulesComponent } from './components/rules/rules.component';
+import { AuthenticatedGuard } from '../core/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +23,17 @@ const routes: Routes = [
     canActivate: [AnonymousGuard]
   },
   {
+    path: 'rules',
+    component: RulesComponent,
+    canActivate: [AuthenticatedGuard]
+  },
+  {
     path: '',
+    redirectTo: '/news',
+    pathMatch: 'full'
+  },
+  {
+    path: 'pdd/**',
     redirectTo: '/news',
     pathMatch: 'full'
   }

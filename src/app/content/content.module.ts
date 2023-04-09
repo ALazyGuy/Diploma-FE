@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { NewsDataComponent } from './components/news-data/news-data.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { RulesComponent } from './components/rules/rules.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RegisterComponent } from './components/register/register.component';
     NewsComponent,
     NewsDataComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RulesComponent
   ],
   imports: [
     CommonModule,

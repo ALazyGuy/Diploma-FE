@@ -16,6 +16,14 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
+  loadRulesById(id: string): Observable<any> {
+    return this.httpClient.get(`${environment.apiUrl}rules/${id}`, {responseType: 'text'});
+  }
+  
+  loadRulesNav(id: string): Observable<any> {
+    return this.httpClient.get(`${environment.apiUrl}rules/nav/${id}`, {responseType: 'text'});
+  }
+
   loadUserInfo(): Observable<UserInfo> {
     if(this.isAuthenticated()){
       return this.httpClient.get<UserInfo>(`${environment.apiUrl}user/info`).pipe(
