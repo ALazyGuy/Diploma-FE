@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, tap, throwError} from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, finalize, map, skipUntil, tap, throwError} from 'rxjs';
 import { JwtResponse } from 'src/app/content/models/jwt-response';
 import { LoginRequest as AuthRequest } from 'src/app/content/models/login-request';
 import { UserInfo } from 'src/app/content/models/user-info';
@@ -12,21 +12,30 @@ import { environment } from 'src/environments/environment';
 export class ApiService {
 
   private readonly userInfo$: BehaviorSubject<UserInfo | null> = new BehaviorSubject<UserInfo | null>(null); 
+  private readonly finished$: ReplaySubject<void> = new ReplaySubject();
 
   constructor(private httpClient: HttpClient) { }
 
   loadUserInfo(): Observable<UserInfo> {
     if(this.isAuthenticated()){
       return this.httpClient.get<UserInfo>(`${environment.apiUrl}user/info`).pipe(
-        tap(data => this.userInfo$.next(data))
+        tap(data => {
+          this.finished$.next();
+          this.userInfo$.next(data);
+        }),
+        finalize(() => this.finished$.next())
       );
     }
+
+    this.finished$.next();
 
     return throwError(null);
   }
 
-  getUserInfo(): BehaviorSubject<UserInfo | null>{
-    return this.userInfo$;
+  getUserInfo(): Observable<UserInfo | null>{
+    return this.userInfo$.pipe(
+      skipUntil(this.finished$)
+    );
   }
 
   register(dto: AuthRequest): Observable<string | undefined> {
@@ -47,7 +56,7 @@ export class ApiService {
       this.loadUserInfo().subscribe();
     }
     
-    return token?.type
+    return token?.type;
   }
 
   clearUserData() {
