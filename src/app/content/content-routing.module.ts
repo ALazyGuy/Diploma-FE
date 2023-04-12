@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AnonymousGuard } from '../core/guards/anonymous.guard';
 import { RulesComponent } from './components/rules/rules.component';
 import { AuthenticatedGuard } from '../core/guards/authenticated.guard';
+import { TestsComponent } from './components/tests/tests.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'rules',
     component: RulesComponent,
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'tests',
+    component: TestsComponent,
     canActivate: [AuthenticatedGuard]
   },
   {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { ContentRoutingModule } from './content-routing.module';
 import { NewsComponent } from './components/news/news.component';
@@ -9,6 +9,8 @@ import { NewsDataComponent } from './components/news-data/news-data.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RulesComponent } from './components/rules/rules.component';
+import { TestsComponent } from './components/tests/tests.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,13 +19,16 @@ import { RulesComponent } from './components/rules/rules.component';
     NewsDataComponent,
     LoginComponent,
     RegisterComponent,
-    RulesComponent
+    RulesComponent,
+    TestsComponent
   ],
   imports: [
     CommonModule,
     ContentRoutingModule,
     CoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class ContentModule { }

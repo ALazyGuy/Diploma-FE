@@ -1,0 +1,37 @@
+<div>
+    <form class="start" *ngIf="!current; else questions">
+        <p>Билет: 
+            <select name="ticket" [(ngModel)] = "selected">
+                <option value="0">1</option>
+                <option value="1">2</option>
+            </select>
+        </p>
+        <button (click)="start()">Начать</button>
+    </form>
+    <ng-template #questions>
+        <div class="status">
+            <div *ngFor="let status of answers; let i = index" 
+            [ngClass]="status == -1 ? 'status-none' : status ? 'status-right' : 'status-wrong'">
+            {{ i + 1 }}
+        </div>
+        </div>
+        <div class="questions" *ngIf="!done; else doneSec">
+            <img [src]="'assets/content/tests/' + current.image" />
+            <div>
+                <p>{{ current.question }}</p>
+                <form class="answers" [formGroup]="form" (submit)="sendAnswer()">
+                    <div *ngFor="let ans of current.variants; let item = index">
+                        <input type="radio" [value]="item" [id]="item" formControlName="answer">
+                        <label [for]="item" [ngClass]="answered ? (item == current.isTrue) ? 'right' : 'wrong' : ''">{{ ans }}</label>
+                    </div>
+                    <button type="submit"> {{ answered ? 'Далее' : 'Ответить' }} </button>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #doneSec>
+        <div class="results">
+            <h1>Ваш результат {{ score }}</h1>
+        </div>
+    </ng-template>
+</div>

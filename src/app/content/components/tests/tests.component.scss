@@ -1,0 +1,93 @@
+:host {
+    margin: 0 50px;
+}
+
+.start {
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+
+    & > button {
+        padding: 10px;
+    }
+}
+
+.questions {
+    width: 100%;
+    display: flex;
+
+    & > div {
+        margin-left: 50px;
+        display: flex;
+        flex-flow: column;
+        
+        & > p {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        & > form {
+            & > button {
+                margin-top: 30px;
+                padding: 10px;
+            }
+
+            & > div {
+                display: flex;
+                flex-direction: row;
+                
+                & > label {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}
+
+.status {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    & > div {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 35px;
+    }
+
+    .status-none {
+        background-color: rgb(189, 182, 173);
+    }
+
+    .status-wrong {
+        background-color: red;
+    }
+
+    .status-right {
+        background-color: rgb(81, 237, 81);
+    }
+}
+
+select {
+    margin-bottom: 30px;
+    width: 100px;
+}
+
+.results {
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrong {
+    color: red;
+}
+
+.right {
+    color: green;
+}
