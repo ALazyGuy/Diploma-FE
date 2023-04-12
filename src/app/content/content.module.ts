@@ -12,6 +12,7 @@ import { RulesComponent } from './components/rules/rules.component';
 import { TestsComponent } from './components/tests/tests.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HistoryComponent } from './components/history/history.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HistoryComponent } from './components/history/history.component';
     RegisterComponent,
     RulesComponent,
     TestsComponent,
-    HistoryComponent
+    HistoryComponent,
+    UserUpdateComponent
   ],
   imports: [
     CommonModule,

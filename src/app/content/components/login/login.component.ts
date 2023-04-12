@@ -19,7 +19,7 @@ export class LoginComponent {
     const dto: LoginRequest = this.formGroup.value;
 
     this.apiService.login(dto).subscribe(data => {
-      this.router.navigateByUrl('/news');
+      !data && this.router.navigateByUrl('/news');
     });
   }
 

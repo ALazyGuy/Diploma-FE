@@ -1,0 +1,6 @@
+<form [formGroup]="formGroup" (submit)="update()">
+    <span>Изменение информации о пользователе</span>
+    <input type="text" formControlName="username" placeholder="Логин">
+    <input type="password" formControlName="password" placeholder="Пароль">
+    <button type="submit">Обновить</button>
+</form>

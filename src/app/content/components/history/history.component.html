@@ -1,12 +1,12 @@
 <div *ngIf="(history$ | async) as data">
     <table>
         <thead>
-            <th>Билет</th>
+            <th>Раздел</th>
             <th>Дата</th>
             <th>Результаты</th>
         </thead>
         <tr *ngFor="let item of data">
-            <td>Билет {{ item.ticket }}</td>
+            <td>Раздел {{ item.ticket }}</td>
             <td>{{ item.date.substring(0, item.date.indexOf('T'))}}</td>
             <td>{{ item.result }} / 10</td>
         </tr>

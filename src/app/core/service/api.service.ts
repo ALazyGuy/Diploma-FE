@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, ReplaySubject, finalize, map, skipUntil, t
 import { JwtResponse } from 'src/app/content/models/jwt-response';
 import { LoginRequest as AuthRequest } from 'src/app/content/models/login-request';
 import { Test } from 'src/app/content/models/test';
+import { UpdateRequest } from 'src/app/content/models/update-request';
 import { UserInfo } from 'src/app/content/models/user-info';
 import { environment } from 'src/environments/environment';
 
@@ -61,8 +62,14 @@ export class ApiService {
     );
   }
 
-  login(dto: AuthRequest): Observable<void> {
+  login(dto: AuthRequest): Observable<string | undefined> {
     return this.httpClient.post<JwtResponse>(`${environment.apiUrl}user/login`, dto).pipe(
+      map(data => this.saveToken(data))
+    );
+  }
+
+  updateUser(dto: UpdateRequest): Observable<string | undefined> {
+    return this.httpClient.put<JwtResponse>(`${environment.apiUrl}user/update`, dto).pipe(
       map(data => this.saveToken(data))
     );
   }

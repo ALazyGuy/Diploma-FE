@@ -13,18 +13,22 @@ export class RegisterComponent {
 
   formGroup: FormGroup = this.createFormGroup();
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) { }
 
   register(): void {
-      const dto: LoginRequest = {
-        username: this.formGroup.controls['username'].value,
-        password: this.formGroup.controls['password'].value
-      };
+    if(this.formGroup.controls['password'].value != this.formGroup.controls['rePassword'].value) {
+      return;
+    }
 
-      this.apiService.register(dto).subscribe(data => {
-        data && alert("Conflict");
-        this.router.navigateByUrl('news');
-      });
+    const dto: LoginRequest = {
+      username: this.formGroup.controls['username'].value,
+      password: this.formGroup.controls['password'].value
+    };
+
+    this.apiService.register(dto).subscribe(data => {
+      data && alert("Conflict");
+      !data && this.router.navigateByUrl('news');
+    });
   }
 
   private createFormGroup(): FormGroup {

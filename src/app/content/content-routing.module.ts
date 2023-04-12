@@ -8,6 +8,7 @@ import { RulesComponent } from './components/rules/rules.component';
 import { AuthenticatedGuard } from '../core/guards/authenticated.guard';
 import { TestsComponent } from './components/tests/tests.component';
 import { HistoryComponent } from './components/history/history.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'history',
     component: HistoryComponent,
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'update',
+    component: UserUpdateComponent,
     canActivate: [AuthenticatedGuard]
   },
   {

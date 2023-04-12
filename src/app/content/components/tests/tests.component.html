@@ -1,6 +1,6 @@
 <div>
     <form class="start" *ngIf="!current; else questions">
-        <p>Билет: 
+        <p>Раздел: 
             <select name="ticket" [(ngModel)] = "selected">
                 <option value="0">1</option>
                 <option value="1">2</option>
@@ -31,7 +31,7 @@
     </ng-template>
     <ng-template #doneSec>
         <div class="results">
-            <h1>Ваш результат {{ score }}</h1>
+            <h1>Ваш результат {{ score }} из 10</h1>
         </div>
     </ng-template>
 </div>

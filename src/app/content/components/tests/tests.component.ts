@@ -64,7 +64,7 @@ export class TestsComponent implements OnInit {
       this.answers[this.questionCounter] = +this.error;
       this.done = true;
       this.score = this.answers.reduce((sum, cur) => sum + cur, 0);
-      this.apiService.updateHistory({ticket: this.selected + 1, result: this.score}).subscribe();
+      this.apiService.updateHistory({ticket: +this.selected + 1, result: this.score}).subscribe();
     }
   }
 
