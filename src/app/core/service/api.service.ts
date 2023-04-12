@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject, finalize, map, skipUntil, tap, throwError} from 'rxjs';
 import { JwtResponse } from 'src/app/content/models/jwt-response';
 import { LoginRequest as AuthRequest } from 'src/app/content/models/login-request';
+import { Test } from 'src/app/content/models/test';
 import { UserInfo } from 'src/app/content/models/user-info';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +16,14 @@ export class ApiService {
   private readonly finished$: ReplaySubject<void> = new ReplaySubject();
 
   constructor(private httpClient: HttpClient) { }
+
+  loadHistory(): Observable<Test[]> {
+    return this.httpClient.get<Test[]>(`${environment.apiUrl}user/test`);
+  }
+  
+  updateHistory(test: {ticket: number, result: number}) {
+    return this.httpClient.put(`${environment.apiUrl}user/test`, test);
+  }
 
   loadRulesById(id: string): Observable<any> {
     return this.httpClient.get(`${environment.apiUrl}rules/${id}`, {responseType: 'text'});

@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { RulesComponent } from './components/rules/rules.component';
 import { TestsComponent } from './components/tests/tests.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HistoryComponent } from './components/history/history.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     RulesComponent,
-    TestsComponent
+    TestsComponent,
+    HistoryComponent
   ],
   imports: [
     CommonModule,

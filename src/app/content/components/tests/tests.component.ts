@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Question } from '../../models/question';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ApiService } from 'src/app/core/service/api.service';
 
 @Component({
   selector: 'app-tests',
@@ -26,7 +27,7 @@ export class TestsComponent implements OnInit {
     answer: new FormControl('answer')
   }); 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit() {
     this.http
@@ -63,6 +64,7 @@ export class TestsComponent implements OnInit {
       this.answers[this.questionCounter] = +this.error;
       this.done = true;
       this.score = this.answers.reduce((sum, cur) => sum + cur, 0);
+      this.apiService.updateHistory({ticket: this.selected + 1, result: this.score}).subscribe();
     }
   }
 
