@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginRequest } from '../../models/login-request';
 import { ApiService } from 'src/app/core/service/api.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,22 @@ export class LoginComponent {
 
   formGroup: FormGroup = this.createFormGroup();
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router, private toastr: ToastrService) {}
 
   login(): void {
+    if(!this.formGroup.valid) {
+      this.toastr.error('Не все поля были заполнены', 'Ошибка авторизации');
+      return;
+    }
+
     const dto: LoginRequest = this.formGroup.value;
 
     this.apiService.login(dto).subscribe(data => {
-      !data && this.router.navigateByUrl('/news');
+      if(data) {
+        this.toastr.error('Неверный логин или пароль', 'Ошибка авторизации')
+      } else {
+        this.router.navigateByUrl('/news');
+      }
     });
   }
 
