@@ -74,6 +74,12 @@ export class ApiService {
     );
   }
 
+  deleteUser(): Observable<void> {
+    return this.httpClient.delete<void>(`${environment.apiUrl}user/user`).pipe(
+      tap(() => this.clearUserData())
+    );
+  }
+
   saveToken(token: any){
     if(token.token){
       localStorage.setItem('token', token.token);

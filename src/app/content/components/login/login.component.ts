@@ -18,7 +18,7 @@ export class LoginComponent {
 
   login(): void {
     if(!this.formGroup.valid) {
-      this.toastr.error('Не все поля были заполнены', 'Ошибка авторизации');
+      this.toastr.error('Не все поля были заполнены');
       return;
     }
 
@@ -26,7 +26,7 @@ export class LoginComponent {
 
     this.apiService.login(dto).subscribe(data => {
       if(data) {
-        this.toastr.error('Неверный логин или пароль', 'Ошибка авторизации')
+        this.toastr.error('Неверный логин или пароль')
       } else {
         this.router.navigateByUrl('/news');
       }

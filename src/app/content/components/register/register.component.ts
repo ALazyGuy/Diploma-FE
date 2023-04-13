@@ -18,12 +18,12 @@ export class RegisterComponent {
 
   register(): void {
     if(this.formGroup.controls['password'].value != this.formGroup.controls['rePassword'].value) {
-      this.toastr.error('Пароли не совпадают', 'Ошибка регистрации');
+      this.toastr.error('Пароли не совпадают');
       return;
     }
 
     if(!this.formGroup.valid) {
-      this.toastr.error('Не все поля были заполнены', 'Ошибка регистрации');
+      this.toastr.error('Не все поля были заполнены');
       return;
     }
 
@@ -34,7 +34,7 @@ export class RegisterComponent {
 
     this.apiService.register(dto).subscribe(data => {
       if(data) {
-        this.toastr.error('Пользователь с таким именем уже существует', 'Ошибка регистрации');
+        this.toastr.error('Пользователь с таким именем уже существует');
       } else {
         this.router.navigateByUrl('news');
       }
